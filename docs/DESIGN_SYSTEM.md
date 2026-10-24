@@ -14,6 +14,7 @@ Base styles live in globals.css; the second visual direction and interaction rul
 
 ## Motion system
 
+- PageTransitions uses React 19.3 ViewTransition with a pathname key. Route snapshots crossfade with 10px departing travel over 260ms and 22px arriving travel over 720ms (580ms mobile), eased with cubic-bezier(.22,1,.36,1). The header remains anchored. React waits for route readiness without an artificial navigation delay. Same-page interactions do not trigger route transitions; browsers without View Transitions keep standard navigation. Reduced motion sets snapshot durations and delays to zero.
 - PageMotion applies staggered 850ms editorial entrances and 1100ms image clipping reveals on every route. Text keeps full opacity and contrast. Each block runs once, with 24px travel (40px for H1) and delays capped at 300ms.
 - ImageMotion uses Motion scroll values, a damped spring, 3% vertical travel and restrained scale. The hero additionally reveals its image frame. Animation starts after hydration, keeping server and first-client markup identical.
 - Header compacts after 45px of scrolling. Mobile navigation expands over 450ms, with staggered link movement, Escape dismissal, keyboard containment and scroll restoration.

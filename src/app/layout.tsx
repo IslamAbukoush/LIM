@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope, Cormorant_Garamond } from "next/font/google";
 import { Header } from "@/components/navigation";
 import { Footer } from "@/components/footer";
+import { PageTransitions } from "@/components/page-transitions";
 import "./globals.css";
 import "./refinement.css";
 const sans = Manrope({
@@ -53,7 +54,7 @@ export default function RootLayout({
           </span>
         </div>
         <Header />
-        <main id="main">{children}</main>
+        <main id="main"><PageTransitions>{children}</PageTransitions></main>
         <Footer />
       </body>
     </html>
