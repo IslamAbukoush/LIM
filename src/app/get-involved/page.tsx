@@ -8,7 +8,7 @@ export default function Involved() {
     <>
       <PageIntro
         label="Get involved & contact"
-        title="Your part in our shared story."
+        title="Take part in community life."
         description="Time, care and generosity take many forms. Explore a way to contribute that feels right for you."
       />
       <nav className="container anchor-nav" aria-label="Ways to get involved">
@@ -19,11 +19,7 @@ export default function Involved() {
       <section id="volunteer" className="container section form-section">
         <div className="form-intro">
           <p className="section-label">Give your time</p>
-          <h2>
-            Bring what
-            <br />
-            makes you, you.
-          </h2>
+          <h2>Volunteer with the League.</h2>
           <p>
             Your skills, perspective and willingness to help can be a starting
             point for connection.
@@ -42,11 +38,7 @@ export default function Involved() {
         <div className="container section form-section">
           <div className="form-intro">
             <p className="section-label">Give with intention</p>
-            <h2>
-              Generosity,
-              <br />
-              with purpose.
-            </h2>
+            <h2>Give Zakat or make a donation.</h2>
             <p>
               Explore a considered giving experience, with Zakat at its heart.
             </p>
@@ -64,11 +56,7 @@ export default function Involved() {
       <section id="contact" className="container section form-section">
         <div className="form-intro">
           <p className="section-label">Let’s connect</p>
-          <h2>
-            A conversation
-            <br />
-            starts here.
-          </h2>
+          <h2>Contact the League.</h2>
           <p>
             For general questions, ideas or interest in the National Mosque
             Project.

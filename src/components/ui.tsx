@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { images } from "@/content/site";
 import type { ReactNode } from "react";
+import { ImageMotion } from "./motion";
 
 export function ActionLink({
   href,
@@ -32,9 +33,9 @@ export function Photo({
   sizes?: string;
 }) {
   return (
-    <div className={`photo ${className}`}>
+    <ImageMotion className={className} priority={priority}>
       <Image {...images[name]} fill priority={priority} sizes={sizes} />
-    </div>
+    </ImageMotion>
   );
 }
 export function PageIntro({
@@ -63,29 +64,41 @@ export function PrototypeNote({
 }
 export function InvolvementCTA() {
   return (
-    <section className="closing">
-      <div className="container closing-inner">
-        <div>
-          <p className="section-label">A community we build together</p>
-          <h2>
-            There’s a place
-            <br />
-            for you here.
-          </h2>
+    <section className="participation">
+      <div className="container participation-inner">
+        <div className="participation-intro">
+          <h2>Get involved.</h2>
+          <p>
+            Find a way to support the community, or get in touch with the
+            League.
+          </p>
         </div>
         <div>
-          <p>
-            Give your time. Share your skills. Support a neighbour. Find your
-            own way to be part of the community.
-          </p>
-          <div className="actions">
-            <ActionLink href="/get-involved#volunteer">
-              Become a volunteer
-            </ActionLink>
-            <ActionLink href="/get-involved#donate" variant="text">
-              Give Zakat
-            </ActionLink>
-          </div>
+          {[
+            {
+              href: "/get-involved#volunteer",
+              title: "Volunteer",
+              body: "Share your time and experience.",
+            },
+            {
+              href: "/get-involved#donate",
+              title: "Give Zakat",
+              body: "Explore the giving experience.",
+            },
+            {
+              href: "/get-involved#contact",
+              title: "Contact the League",
+              body: "Questions, ideas and enquiries.",
+            },
+          ].map((item) => (
+            <Link className="participate-link" key={item.href} href={item.href}>
+              <span>
+                <strong>{item.title}</strong>
+                <small>{item.body}</small>
+              </span>
+              <ArrowUpRight size={22} />
+            </Link>
+          ))}
         </div>
       </div>
     </section>

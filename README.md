@@ -53,7 +53,7 @@ Playwright uses the installed Microsoft Edge browser (`channel: 'msedge'`). On a
 
 ## Design and assets
 
-See [design system](docs/DESIGN_SYSTEM.md) and [asset sources / generation prompt](docs/ASSETS.md). The proposed brand mark is not an official LIM logo. The hero image is AI-generated and labeled. All other photography is illustrative, not evidence of LIM activities. Mosque imagery depicts the Alhambra in Spain and is explicitly not a project rendering. News dates and reports are samples; no achievements, land, budget, approvals or construction dates are invented.
+See [design system](docs/DESIGN_SYSTEM.md) and [asset sources / generation prompt](docs/ASSETS.md). The brand mark follows the user-supplied LIM reference, isolated/recreated as a transparent raster asset. The hero image is AI-generated and labeled. All other photography is illustrative, not evidence of LIM activities. Mosque imagery depicts the Alhambra in Spain and is explicitly not a project rendering. News dates and reports are samples; no achievements, land, budget, approvals or construction dates are invented.
 
 Sample PDFs are committed in `public/reports/`. Regenerate with `node scripts/create-sample-reports.mjs`.
 

@@ -9,7 +9,7 @@ export default function News() {
     <>
       <PageIntro
         label="News & announcements"
-        title="Life, in community."
+        title="News from the League."
         description="Stories, ideas and perspectives. A space to keep in touch with the life of the League."
       />
       <section className="container featured-story">

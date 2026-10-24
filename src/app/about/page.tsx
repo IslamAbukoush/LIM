@@ -12,7 +12,7 @@ export default function About() {
     <>
       <PageIntro
         label="About & mission"
-        title="Belonging begins with us."
+        title="Faith and community in Moldova."
         description="Introducing the Islamic League of Moldova, and a proposed vision rooted in faith, dignity and care for our neighbours."
       />
       <div className="container">
@@ -23,10 +23,7 @@ export default function About() {
         </PrototypeNote>
       </div>
       <section className="container section split-editorial">
-        <h2>
-          A shared life.
-          <br />A shared responsibility.
-        </h2>
+        <h2>The League’s role.</h2>
         <div className="prose">
           <p className="lede">
             A community is more than a place. It is the feeling that there is
@@ -46,7 +43,7 @@ export default function About() {
       <section className="values-section">
         <div className="container section">
           <p className="section-label">Proposed guiding values</p>
-          <h2>What we stand for.</h2>
+          <h2>Our guiding principles.</h2>
           <div className="values-grid">
             {[
               ["Dignity", "Respect for every person, in every interaction."],
@@ -74,11 +71,7 @@ export default function About() {
       <section className="container section split-editorial">
         <p className="section-label">Looking ahead</p>
         <div>
-          <h2>
-            A future with room
-            <br />
-            for everyone.
-          </h2>
+          <h2>A platform for community life.</h2>
           <p className="lede">
             A welcoming platform for community life, clear information, shared
             learning and meaningful participation.

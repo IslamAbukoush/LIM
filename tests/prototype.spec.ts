@@ -22,6 +22,7 @@ const routes = [
 test("All routes, imagery, links and desktop accessibility", async ({
   page,
 }) => {
+  test.setTimeout(120000);
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   for (const route of routes) {

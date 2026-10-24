@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { programmes, type Story, type Report } from "@/content/site";
 import { Photo, ActionLink } from "./ui";
@@ -54,6 +55,7 @@ export function ReportCard({ report }: { report: Report }) {
   return (
     <article className="report-row">
       <Link href={`/reports/${report.slug}`} className="report-cover">
+        <Image src="/brand/lim-seal.webp" width={48} height={48} alt="" />
         <span>LIM / Sample publication</span>
         <h3>{report.title}</h3>
         <span>{report.year} · Illustrative edition</span>

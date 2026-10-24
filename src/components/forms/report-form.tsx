@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowRight, LoaderCircle } from "lucide-react";
 import { Field, Consent, DemoFailure, Success, validEmail } from "./fields";
 import { submitDemo } from "@/lib/submissions";
+import { FormTransition } from "../motion";
 const localDate = () => {
   const now = new Date();
   return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
@@ -136,142 +137,148 @@ export function ReportForm() {
           </div>
         )}
         <fieldset disabled={busy}>
-          {step === 0 && (
-            <>
-              <Field
-                {...bind("type")}
-                label="Type of experience"
-                required
-                options={[
-                  "Workplace",
-                  "Education",
-                  "Access to services",
-                  "Public space",
-                  "Online",
-                  "Other",
-                  "Not sure",
-                ]}
-              />
-              <Field
-                {...bind("description")}
-                label="What happened?"
-                required
-                multiline
-              />
-              <div className="form-grid">
+          <FormTransition state={step}>
+            {step === 0 && (
+              <>
                 <Field
-                  {...bind("location")}
-                  label="Town or setting (optional)"
+                  {...bind("type")}
+                  label="Type of experience"
+                  required
+                  options={[
+                    "Workplace",
+                    "Education",
+                    "Access to services",
+                    "Public space",
+                    "Online",
+                    "Other",
+                    "Not sure",
+                  ]}
                 />
-                <Field {...bind("date")} label="Date (optional)" type="date" />
-              </div>
-              <Field
-                {...bind("support")}
-                label="Additional context (optional)"
-                multiline
-              />
-              <p className="form-hint">
-                Please avoid names of other people, identity numbers or
-                sensitive documents. File uploads are not enabled in this
-                prototype.
-              </p>
-            </>
-          )}
-          {step === 1 && (
-            <>
-              <p>
-                You can explore the form without providing your name or contact
-                details.
-              </p>
-              <Field
-                {...bind("preference")}
-                label="Contact preference"
-                options={["No contact", "Email"]}
-              />
-              <Field
-                {...bind("name")}
-                label="Your name (optional)"
-                autoComplete="name"
-              />
-              <Field
-                {...bind("email")}
-                label={
-                  values.preference === "Email"
-                    ? "Email address"
-                    : "Email address (optional)"
-                }
-                type="email"
-                required={values.preference === "Email"}
-                autoComplete="email"
-              />
-              <p className="form-hint">
-                No email will be sent. These preferences only demonstrate the
-                future workflow.
-              </p>
-            </>
-          )}
-          {step === 2 && (
-            <>
-              <p>
-                Take a moment to review your entries. You can go back and change
-                anything.
-              </p>
-              <dl className="review-list">
-                {Object.entries(labels).map(([key, label]) => (
-                  <div key={key}>
-                    <dt>{label}</dt>
-                    <dd>{values[key]?.trim() || "Not provided"}</dd>
-                  </div>
-                ))}
-              </dl>
-              <Consent
-                checked={consent}
-                onChange={setConsent}
-                error={errors.consent}
-              >
-                I understand this is a design prototype. This does not submit a
-                real report, store my entries or request assistance.
-              </Consent>
-              <p className="form-hint">
-                Read the{" "}
-                <Link href="/privacy">prototype privacy information</Link>.
-              </p>
-              <DemoFailure checked={failure} onChange={setFailure} />
-            </>
-          )}
-          {submitError && (
-            <p className="error-summary" role="alert">
-              {submitError}
-            </p>
-          )}
-          <div className="form-navigation">
-            {step > 0 && (
-              <button
-                type="button"
-                className="button button-outline"
-                onClick={() => {
-                  setStep(step - 1);
-                  setErrors({});
-                  setSubmitError("");
-                }}
-              >
-                Back
-              </button>
+                <Field
+                  {...bind("description")}
+                  label="What happened?"
+                  required
+                  multiline
+                />
+                <div className="form-grid">
+                  <Field
+                    {...bind("location")}
+                    label="Town or setting (optional)"
+                  />
+                  <Field
+                    {...bind("date")}
+                    label="Date (optional)"
+                    type="date"
+                  />
+                </div>
+                <Field
+                  {...bind("support")}
+                  label="Additional context (optional)"
+                  multiline
+                />
+                <p className="form-hint">
+                  Please avoid names of other people, identity numbers or
+                  sensitive documents. File uploads are not enabled in this
+                  prototype.
+                </p>
+              </>
             )}
-            <button className="button button-primary" type="submit">
-              {busy ? (
-                <>
-                  <LoaderCircle size={18} className="spin" />
-                  Completing preview…
-                </>
-              ) : (
-                <>
-                  {step === 2 ? "Finish demo" : "Continue"}
-                  <ArrowRight size={18} />
-                </>
+            {step === 1 && (
+              <>
+                <p>
+                  You can explore the form without providing your name or
+                  contact details.
+                </p>
+                <Field
+                  {...bind("preference")}
+                  label="Contact preference"
+                  options={["No contact", "Email"]}
+                />
+                <Field
+                  {...bind("name")}
+                  label="Your name (optional)"
+                  autoComplete="name"
+                />
+                <Field
+                  {...bind("email")}
+                  label={
+                    values.preference === "Email"
+                      ? "Email address"
+                      : "Email address (optional)"
+                  }
+                  type="email"
+                  required={values.preference === "Email"}
+                  autoComplete="email"
+                />
+                <p className="form-hint">
+                  No email will be sent. These preferences only demonstrate the
+                  future workflow.
+                </p>
+              </>
+            )}
+            {step === 2 && (
+              <>
+                <p>
+                  Take a moment to review your entries. You can go back and
+                  change anything.
+                </p>
+                <dl className="review-list">
+                  {Object.entries(labels).map(([key, label]) => (
+                    <div key={key}>
+                      <dt>{label}</dt>
+                      <dd>{values[key]?.trim() || "Not provided"}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <Consent
+                  checked={consent}
+                  onChange={setConsent}
+                  error={errors.consent}
+                >
+                  I understand this is a design prototype. This does not submit
+                  a real report, store my entries or request assistance.
+                </Consent>
+                <p className="form-hint">
+                  Read the{" "}
+                  <Link href="/privacy">prototype privacy information</Link>.
+                </p>
+                <DemoFailure checked={failure} onChange={setFailure} />
+              </>
+            )}
+            {submitError && (
+              <p className="error-summary" role="alert">
+                {submitError}
+              </p>
+            )}
+            <div className="form-navigation">
+              {step > 0 && (
+                <button
+                  type="button"
+                  className="button button-outline"
+                  onClick={() => {
+                    setStep(step - 1);
+                    setErrors({});
+                    setSubmitError("");
+                  }}
+                >
+                  Back
+                </button>
               )}
-            </button>
-          </div>
+              <button className="button button-primary" type="submit">
+                {busy ? (
+                  <>
+                    <LoaderCircle size={18} className="spin" />
+                    Completing preview…
+                  </>
+                ) : (
+                  <>
+                    {step === 2 ? "Finish demo" : "Continue"}
+                    <ArrowRight size={18} />
+                  </>
+                )}
+              </button>
+            </div>
+          </FormTransition>
         </fieldset>
       </form>
     </div>

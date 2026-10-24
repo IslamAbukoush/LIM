@@ -1,29 +1,30 @@
-# LIM design system
+# LIM design system — second design pass
 
-## Direction
+## Direction and identity
 
-An editorial civic institution: generous but purposeful space, warm paper, forest green and human photography. A single architectural line mark is a proposed identity, not an official logo. Photography is illustrative, never evidence of LIM activity.
+A restrained institutional website with the supplied LIM identity. The circular seal was isolated/recreated from the supplied reference with the built-in imagegen tool; it is not claimed to be an exact vector extraction. A Romanian wordmark accompanies it in the header and footer. The emblem also appears in the mission introduction, report covers and browser icon.
 
-## Architecture
+The decorative arch, sports-volunteer homepage image, repeated slogan headings, identical homepage news cards and oversized promotional closing panel were removed. News now has a lead story and text-led secondary articles. Participation uses clear action rows. Core headings use Manrope; the mosque feature and Romanian identity retain Cormorant Garamond.
 
-Next.js App Router with server-rendered editorial pages and small client boundaries for navigation, Motion reveals, filters and forms. Seven primary routes, structured programme/news/report details, plus report-a-case and privacy. Local typed records in `src/content` are the future CMS boundary. `src/lib/submissions.ts` is the future API boundary. No credentials, personal-data persistence, payment handling or production integrations.
+## Tokens and layout
 
-## Tokens and typography
+Brand green #375D19, secondary #74A029, gold #D4A434 and cream #FAF3D5 remain. Background #FBFCF9, ink #202C23 and muted #5F6A60 provide quieter contrast. Controls use 4px corners and photography has square corners. Desktop content is 1248px wide, with 48px gutters; tablet 32px, mobile 22px.
 
-Deep green #375D19; accent green #74A029; gold #D4A434; cream #FAF3D5. Ink #243128, muted #657064, paper #FAFAF6, white surfaces, warm borders. Gold is decorative, never small text on white. Manrope provides body/navigation; Cormorant Garamond provides selected display headings. Both are self-hosted by next/font. Text sizes use clamp, body 16–18px, labels 14px, readable measure 65 characters. Two radii: 6px controls and 0px editorial images.
+Base styles live in globals.css; the second visual direction and interaction rules are isolated in refinement.css. Content remains typed and separate from presentation in src/content/site.ts.
 
-## Layout and page hierarchy
+## Motion system
 
-Desktop uses a 1248px content width and 48px gutters; tablet 32px and mobile 22px. Hero is an asymmetric text/photo composition. Mission uses a large editorial statement; programmes use numbered rows; advocacy uses a quiet green panel; the mosque story uses a full-width architectural image. News uses magazine columns. Mobile prioritizes content and actions, with a full-width navigation disclosure and single-column forms.
+- PageMotion applies staggered 850ms editorial entrances and 1100ms image clipping reveals on every route. Text keeps full opacity and contrast. Each block runs once, with 24px travel (40px for H1) and delays capped at 300ms.
+- ImageMotion uses Motion scroll values, a damped spring, 3% vertical travel and restrained scale. The hero additionally reveals its image frame. Animation starts after hydration, keeping server and first-client markup identical.
+- Header compacts after 45px of scrolling. Mobile navigation expands over 450ms, with staggered link movement, Escape dismissal, keyboard containment and scroll restoration.
+- Buttons and arrows have coherent hover/press transitions; programme rules draw on hover. No cursor gimmicks or scroll interception.
+- Form steps transition over 450ms while keeping values in the parent. Success checks draw, errors enter gently, and news filter results transition.
+- Native FAQ disclosures animate with progressive CSS enhancement where supported. They remain functional without animation.
 
-## Motion
+Reduced-motion preferences disable scripted reveals, parallax, smooth scrolling and animated transitions. Server content remains visible without JavaScript. No content is gated behind an animation, and browser-native scrolling is preserved. Motion implementation follows the [official Motion scroll documentation](https://motion.dev/docs/react-scroll-animations).
 
-Shared 500ms ease-out translation reveals, at most 18px travel; images receive subtle 600ms hover scale. No scroll hijacking or delayed controls. Reduced motion removes translation, scaling and smooth scrolling. Page entrances use a short 4px translation. Native details elements keep FAQ interactions keyboard accessible.
+## Integration and content boundaries
 
-## Forms and accessibility
+Next.js App Router server pages retain small client boundaries for interaction. Local content remains the future CMS boundary; src/lib/submissions.ts remains the mock/API boundary. No live submissions, payments, case storage or Google credentials were introduced.
 
-Persistent labels, required indicators, inline errors linked through aria-describedby, error summaries, focus on step changes, loading and success states. Multi-step reporting never stores or uploads sensitive information. Mock failure can be exercised via the labeled demo control. Donation review never requests card details. All interactions work without hover; focus rings are visible. Navigation uses aria-current, Escape dismissal and focus restoration. Text contrast and responsive behavior are checked with automated browser tests.
-
-## Content approval
-
-All programme offerings, news dates, publication documents and project milestones are examples or pending confirmation. Official copy, logo, authorized imagery, contacts, policies, service availability and project facts must replace placeholders before production.
+Programme offerings, articles, reports and project milestones remain illustrative or pending confirmation. The hero remains an explicitly labeled AI illustration. Production will need approved copy, imagery, service information and operational policies.

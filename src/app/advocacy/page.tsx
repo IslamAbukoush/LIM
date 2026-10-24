@@ -8,17 +8,13 @@ export default function Advocacy() {
     <>
       <PageIntro
         label="Advocacy & reports"
-        title="Dignity needs a voice."
+        title="Community advocacy."
         description="A space for community perspectives, considered research and the work of building understanding."
       />
       <section className="container advocacy-feature">
         <div>
           <p className="section-label">Sharing your experience</p>
-          <h2>
-            Begin with
-            <br />
-            being heard.
-          </h2>
+          <h2>Report an experience of discrimination.</h2>
         </div>
         <div>
           <p>
@@ -35,11 +31,7 @@ export default function Advocacy() {
         </div>
       </section>
       <section className="container section split-editorial">
-        <h2>
-          Listen. Understand.
-          <br />
-          Inform change.
-        </h2>
+        <h2>Research and representation.</h2>
         <div className="prose">
           <p className="lede">
             Representation starts with understanding the experiences of the

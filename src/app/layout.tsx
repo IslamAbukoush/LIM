@@ -3,6 +3,7 @@ import { Manrope, Cormorant_Garamond } from "next/font/google";
 import { Header } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import "./globals.css";
+import "./refinement.css";
 const sans = Manrope({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -36,7 +37,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${sans.variable} ${serif.variable}`}>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${sans.variable} ${serif.variable}`}
+    >
       <body>
         <a className="skip-link" href="#main">
           Skip to content

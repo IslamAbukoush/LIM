@@ -45,9 +45,9 @@ export default function Privacy() {
         </p>
         <h2>Images and identity</h2>
         <p>
-          The proposed logo is a design concept. Images are temporary
-          illustrative photography and do not document LIM activities. The
-          Alhambra photograph shows architecture in Spain, not the National
+          The identity follows the supplied LIM logo reference. Images are
+          temporary illustrative photography and do not document LIM activities.
+          The Alhambra photograph shows architecture in Spain, not the National
           Mosque Project.
         </p>
       </article>

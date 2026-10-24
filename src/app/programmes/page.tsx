@@ -13,7 +13,7 @@ export default function Programmes() {
     <>
       <PageIntro
         label="Programmes & services"
-        title="People at the heart of our work."
+        title="Community support & shared learning."
         description="Explore how community support, shared learning and faith could come together through LIM’s programmes."
       />
       <div className="container">

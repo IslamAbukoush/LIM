@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ArrowRight, LoaderCircle } from "lucide-react";
 import { Consent, DemoFailure, Field, Success } from "./fields";
 import { submitDemo } from "@/lib/submissions";
+import { FormTransition } from "../motion";
 export function DonationForm() {
   const [type, setType] = useState("Zakat");
   const [amount, setAmount] = useState("500");
@@ -63,133 +64,135 @@ export function DonationForm() {
   return (
     <form onSubmit={submit} noValidate>
       <fieldset disabled={busy}>
-        {step === 0 ? (
-          <>
-            <fieldset className="choice-fieldset">
-              <legend>Choose your giving</legend>
-              <div className="choice-row">
-                {["Zakat", "Sadaqah", "General support"].map((t) => (
-                  <label className="choice" key={t}>
-                    <input
-                      type="radio"
-                      name="donation-type"
-                      value={t}
-                      checked={type === t}
-                      onChange={() => setType(t)}
-                    />
-                    <span>{t}</span>
-                  </label>
-                ))}
-              </div>
-            </fieldset>
-            <fieldset className="choice-fieldset">
-              <legend>
-                Choose an amount <span className="muted">(MDL)</span>
-              </legend>
-              <div className="amount-grid">
-                {["100", "250", "500", "1000"].map((a) => (
+        <FormTransition state={step}>
+          {step === 0 ? (
+            <>
+              <fieldset className="choice-fieldset">
+                <legend>Choose your giving</legend>
+                <div className="choice-row">
+                  {["Zakat", "Sadaqah", "General support"].map((t) => (
+                    <label className="choice" key={t}>
+                      <input
+                        type="radio"
+                        name="donation-type"
+                        value={t}
+                        checked={type === t}
+                        onChange={() => setType(t)}
+                      />
+                      <span>{t}</span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+              <fieldset className="choice-fieldset">
+                <legend>
+                  Choose an amount <span className="muted">(MDL)</span>
+                </legend>
+                <div className="amount-grid">
+                  {["100", "250", "500", "1000"].map((a) => (
+                    <button
+                      type="button"
+                      key={a}
+                      aria-pressed={!custom && amount === a}
+                      onClick={() => {
+                        setCustom(false);
+                        setAmount(a);
+                      }}
+                    >
+                      {Number(a).toLocaleString("en-GB")}
+                    </button>
+                  ))}
                   <button
                     type="button"
-                    key={a}
-                    aria-pressed={!custom && amount === a}
+                    aria-pressed={custom}
                     onClick={() => {
-                      setCustom(false);
-                      setAmount(a);
+                      setCustom(true);
+                      setAmount("");
                     }}
                   >
-                    {Number(a).toLocaleString("en-GB")}
+                    Custom
                   </button>
-                ))}
-                <button
-                  type="button"
-                  aria-pressed={custom}
-                  onClick={() => {
-                    setCustom(true);
-                    setAmount("");
-                  }}
-                >
-                  Custom
-                </button>
-              </div>
-            </fieldset>
-            {custom && (
-              <Field
-                label="Custom amount (MDL)"
-                name="custom-amount"
-                type="number"
-                min="1"
-                max="1000000"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                required
-                error={error || undefined}
-              />
-            )}
-            <p className="form-hint">
-              A one-time contribution preview. Zakat allocation and eligibility
-              information will be confirmed by LIM before launch.
-            </p>
-          </>
-        ) : (
-          <>
-            <h3>Review your contribution</h3>
-            <dl className="review-list">
-              <div>
-                <dt>Giving type</dt>
-                <dd>{type}</dd>
-              </div>
-              <div>
-                <dt>Amount</dt>
-                <dd>{Number(amount).toLocaleString("en-GB")} MDL</dd>
-              </div>
-              <div>
-                <dt>Frequency</dt>
-                <dd>One time</dd>
-              </div>
-            </dl>
-            <p>
-              No payment details are needed. The production website will connect
-              to an approved payment provider.
-            </p>
-            <Consent checked={consent} onChange={setConsent}>
-              I understand that this preview does not make a payment or create a
-              pledge.
-            </Consent>
-            <DemoFailure checked={failure} onChange={setFailure} />
-          </>
-        )}
-        {error && (
-          <p className="error-summary" role="alert">
-            {error}
-          </p>
-        )}
-        <div className="actions">
-          {step === 1 && (
-            <button
-              type="button"
-              className="button button-outline"
-              onClick={() => {
-                setStep(0);
-                setError("");
-              }}
-            >
-              Edit amount
-            </button>
+                </div>
+              </fieldset>
+              {custom && (
+                <Field
+                  label="Custom amount (MDL)"
+                  name="custom-amount"
+                  type="number"
+                  min="1"
+                  max="1000000"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  required
+                  error={error || undefined}
+                />
+              )}
+              <p className="form-hint">
+                A one-time contribution preview. Zakat allocation and
+                eligibility information will be confirmed by LIM before launch.
+              </p>
+            </>
+          ) : (
+            <>
+              <h3>Review your contribution</h3>
+              <dl className="review-list">
+                <div>
+                  <dt>Giving type</dt>
+                  <dd>{type}</dd>
+                </div>
+                <div>
+                  <dt>Amount</dt>
+                  <dd>{Number(amount).toLocaleString("en-GB")} MDL</dd>
+                </div>
+                <div>
+                  <dt>Frequency</dt>
+                  <dd>One time</dd>
+                </div>
+              </dl>
+              <p>
+                No payment details are needed. The production website will
+                connect to an approved payment provider.
+              </p>
+              <Consent checked={consent} onChange={setConsent}>
+                I understand that this preview does not make a payment or create
+                a pledge.
+              </Consent>
+              <DemoFailure checked={failure} onChange={setFailure} />
+            </>
           )}
-          <button className="button button-primary" type="submit">
-            {busy ? (
-              <>
-                <LoaderCircle size={18} className="spin" />
-                Finishing preview…
-              </>
-            ) : (
-              <>
-                {step === 0 ? "Review contribution" : "Complete demo"}
-                <ArrowRight size={18} />
-              </>
+          {error && (
+            <p className="error-summary" role="alert">
+              {error}
+            </p>
+          )}
+          <div className="actions">
+            {step === 1 && (
+              <button
+                type="button"
+                className="button button-outline"
+                onClick={() => {
+                  setStep(0);
+                  setError("");
+                }}
+              >
+                Edit amount
+              </button>
             )}
-          </button>
-        </div>
+            <button className="button button-primary" type="submit">
+              {busy ? (
+                <>
+                  <LoaderCircle size={18} className="spin" />
+                  Finishing preview…
+                </>
+              ) : (
+                <>
+                  {step === 0 ? "Review contribution" : "Complete demo"}
+                  <ArrowRight size={18} />
+                </>
+              )}
+            </button>
+          </div>
+        </FormTransition>
       </fieldset>
     </form>
   );

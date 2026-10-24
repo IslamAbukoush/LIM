@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import {
   ActionLink,
@@ -6,7 +7,6 @@ import {
   InvolvementCTA,
   PrototypeNote,
 } from "@/components/ui";
-import { Reveal } from "@/components/motion";
 import { ProgrammeList, StoryCard } from "@/components/editorial";
 import { stories } from "@/content/site";
 export default function Home() {
@@ -16,135 +16,131 @@ export default function Home() {
         <div className="hero-copy">
           <p className="hero-location">Islamic League of Moldova</p>
           <h1>
-            Rooted in faith.
-            <br />
-            <em>Open to all.</em>
+            A community.
+            <br />A place to belong.
           </h1>
           <p className="lede">
-            A vision of a community where dignity is shared, neighbours connect,
-            and everyone belongs.
+            Faith, community life and a shared commitment to dignity in the
+            Republic of Moldova.
           </p>
           <div className="actions">
             <ActionLink href="/programmes">Explore our work</ActionLink>
-            <ActionLink href="/get-involved" variant="text">
-              Get involved
+            <ActionLink href="/about" variant="text">
+              About the League
             </ActionLink>
           </div>
           <a className="hero-discover" href="#mission">
-            <ArrowDown size={17} />
-            Discover our community
+            <span className="scroll-cue">
+              <ArrowDown size={17} />
+            </span>
+            Discover LIM
           </a>
         </div>
         <div className="hero-visual">
           <Photo
             name="community"
             priority
-            sizes="(max-width: 800px) 100vw, 55vw"
+            sizes="(max-width:700px) 100vw,55vw"
           />
           <div className="hero-caption">
-            <span>Faith. Dignity. Belonging.</span>
-            <span>AI illustration ? Fictional gathering</span>
+            <span>Community, in everyday life</span>
+            <span>AI illustration · Fictional gathering</span>
           </div>
-          <span className="hero-corner" aria-hidden="true" />
         </div>
       </section>
-      <div className="container action-strip">
-        <span>A shared commitment to dignity.</span>
-        <Link href="/report-discrimination">
-          Experienced discrimination? <strong>Share your experience</strong>
-          <ArrowUpRight size={18} />
-        </Link>
-      </div>
       <section id="mission" className="container section mission">
-        <p className="section-label">Our purpose</p>
-        <Reveal>
+        <div className="mission-identity">
+          <Image
+            src="/brand/lim-seal.webp"
+            width={120}
+            height={120}
+            alt="LIM emblem"
+          />
+          <p className="section-label">About the League</p>
+        </div>
+        <div>
           <h2>
-            Faith brings us together.
+            Making room for faith
             <br />
-            <span className="muted-heading">Care carries us forward.</span>
+            in our shared society.
           </h2>
           <div className="mission-bottom">
             <p>
-              Our proposed mission is simple: nurture a sense of belonging for
-              Muslims in Moldova, foster understanding, and make room for every
-              person’s dignity.
+              This platform brings together the League’s proposed areas of
+              community work, information about faith and belonging, and a way
+              to share experiences of discrimination.
             </p>
             <ActionLink href="/about" variant="text">
-              Meet the League
-            </ActionLink>
-          </div>
-        </Reveal>
-      </section>
-      <section className="work-section">
-        <div className="container section work-grid">
-          <Reveal>
-            <Photo name="volunteer" className="work-photo" />
-            <p className="image-caption">
-              The spirit of showing up for one another. Illustrative image.
-            </p>
-          </Reveal>
-          <div>
-            <p className="section-label">Ways to serve</p>
-            <h2>Care, in practice.</h2>
-            <p className="section-description">
-              Explore the areas of work this platform is designed to support.
-            </p>
-            <ProgrammeList />
-            <PrototypeNote>
-              Example programme categories. Services are subject to
-              confirmation.
-            </PrototypeNote>
-            <ActionLink href="/programmes" variant="text">
-              All programmes & services
+              Our mission
             </ActionLink>
           </div>
         </div>
       </section>
-      <section className="container section">
-        <Reveal>
-          <div className="advocacy-feature">
-            <div>
-              <p className="section-label">Dignity without exception</p>
-              <h2>
-                Your experience
-                <br />
-                deserves to be heard.
-              </h2>
-            </div>
-            <div>
-              <p>
-                A thoughtful first step towards sharing an experience of
-                discrimination. Take it at your own pace, with space to review
-                before you finish.
-              </p>
-              <ActionLink href="/report-discrimination" variant="light">
-                Report discrimination
-              </ActionLink>
-              <Link className="under-link" href="/advocacy">
-                Explore advocacy & reports
-              </Link>
-              <p className="small-note">
-                Prototype only. No report is sent or stored.
-              </p>
-            </div>
+      <section className="work-section">
+        <div className="container section work-grid">
+          <div className="work-introduction">
+            <p className="section-label">Programmes & services</p>
+            <h2>
+              Where we
+              <br />
+              can contribute.
+            </h2>
+            <p>
+              Practical care, opportunities to learn, and spaces to connect.
+            </p>
+            <ActionLink href="/programmes" variant="text">
+              Explore all programmes
+            </ActionLink>
+            <PrototypeNote>
+              Proposed programme areas. Availability is not yet confirmed.
+            </PrototypeNote>
           </div>
-        </Reveal>
+          <ProgrammeList />
+        </div>
+      </section>
+      <section className="container section advocacy-editorial">
+        <div>
+          <p className="section-label">Representation & advocacy</p>
+          <h2>
+            A clear way to
+            <br />
+            share your experience.
+          </h2>
+        </div>
+        <div>
+          <p>
+            If you have experienced discrimination, the proposed reporting
+            process gives you time to explain what happened and review what you
+            share.
+          </p>
+          <ActionLink href="/report-discrimination">
+            Report discrimination
+          </ActionLink>
+          <Link className="under-link" href="/advocacy">
+            Research & publications
+            <ArrowUpRight size={16} />
+          </Link>
+          <PrototypeNote>
+            Explore the demo. No report is sent or stored.
+          </PrototypeNote>
+        </div>
       </section>
       <section className="mosque-feature">
         <Photo name="architecture" sizes="100vw" />
         <div className="mosque-shade" />
         <div className="container mosque-content">
-          <p className="section-label">The National Mosque Project</p>
+          <p className="section-label">National Mosque Project</p>
           <h2>
-            A place for prayer.
-            <br />A space for community.
+            A shared place
+            <br />
+            for the years ahead.
           </h2>
           <p>
-            Explore a vision for a shared spiritual and community home in
+            The vision for a place of worship, learning and community in
             Moldova.
           </p>
           <ActionLink href="/mosque-project" variant="light">
-            Discover the vision
+            Explore the project
           </ActionLink>
           <span className="mosque-caption">
             Architectural inspiration · Alhambra, Spain · Not a project design
@@ -154,17 +150,31 @@ export default function Home() {
       <section className="container section">
         <div className="section-heading">
           <div>
-            <p className="section-label">From the community</p>
-            <h2>Stories & perspectives.</h2>
+            <p className="section-label">News & announcements</p>
+            <h2>From the journal.</h2>
           </div>
           <ActionLink href="/news" variant="text">
-            Visit the journal
+            All stories
           </ActionLink>
         </div>
-        <div className="news-grid">
-          {stories.map((s) => (
-            <StoryCard key={s.slug} story={s} />
-          ))}
+        <div className="journal-layout">
+          <StoryCard story={stories[0]} />
+          <div className="journal-list">
+            {stories.slice(1).map((story) => (
+              <article className="journal-row" key={story.slug}>
+                <p className="story-meta">{story.category} · Sample story</p>
+                <Link href={`/news/${story.slug}`}>
+                  <h3>{story.title}</h3>
+                  <ArrowUpRight size={22} />
+                </Link>
+                <p>{story.excerpt}</p>
+                <time dateTime={story.date}>{story.date} · Example date</time>
+              </article>
+            ))}
+            <p className="journal-note">
+              Illustrative editorial content for design review.
+            </p>
+          </div>
         </div>
       </section>
       <InvolvementCTA />
