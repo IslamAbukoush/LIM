@@ -5,8 +5,8 @@ export default defineConfig({
   workers: 2,
   use: {
     baseURL: process.env.TEST_BASE_URL || "http://127.0.0.1:3000",
-    browserName: "chromium",
-    channel: "msedge",
+    browserName: process.env.TEST_BROWSER === "webkit" ? "webkit" : "chromium",
+    channel: process.env.TEST_BROWSER === "webkit" ? undefined : "msedge",
     screenshot: "only-on-failure",
   },
   reporter: "list",

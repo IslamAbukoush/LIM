@@ -4,7 +4,7 @@ Verified 26 October 2026, using Microsoft Edge through Playwright on Windows.
 
 - Production static export builds successfully with Next.js 16.4.3.
 - TypeScript strict typecheck passes.
-- Nineteen browser tests pass against the production export (14 regression checks and five internationalization checks).
+- Twenty-two browser tests pass against the production export, including three mobile stability checks also run separately in WebKit.
 - All 17 content routes return 200, provide a single H1 and load their images.
 - axe WCAG A/AA scans return zero violations across those routes, plus focused mobile scans.
 - No horizontal overflow at tested widths: 390, 768 and 1440 pixels.
@@ -22,3 +22,7 @@ Verified 26 October 2026, using Microsoft Edge through Playwright on Windows.
 Tests are reproducible in `tests/prototype.spec.ts`, `tests/motion.spec.ts`, `tests/page-transitions.spec.ts` and `tests/i18n.spec.ts`. Screenshots are local, ignored artifacts. Automated scans are not an accessibility certification; screen-reader and broader cross-browser review remain appropriate before production.
 
 All content, imagery, sample reports and forms remain explicitly illustrative. No backend, CMS, Google Workspace integration, live payment processing or real case management is enabled.
+
+## Safari follow-up
+
+Playwright WebKit checks cover mobile header position and height across scroll offsets and viewport resizing, date-input width and editing, stable touch images, menu navigation, browser history and absence of page errors. Run with `TEST_BROWSER=webkit` and `tests/safari.spec.ts`. Desktop WebKit emulation does not reproduce physical iOS Safari/Telegram toolbar or rubber-band compositing; those still require a real-device check. Related WebKit sticky-layer reports include https://bugs.webkit.org/show_bug.cgi?id=263004; that report is context, not proof of the exact cause in the supplied screenshots.

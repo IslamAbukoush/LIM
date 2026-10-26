@@ -1091,3 +1091,41 @@ html[lang="ru"] h1, html[lang="ru"] h2 { letter-spacing: -0.035em; }
   .brand-wordmark > span { font-size: 13px; }
   .brand { gap: 7px; }
 }
+/* Stable mobile chrome: do not tie header geometry to the dynamic toolbar. */
+html { background: var(--background); }
+.header-slot { display: contents; }
+.field, .form-grid > *, fieldset { min-width: 0; }
+.field input, .field select, .field textarea { min-width: 0; max-width: 100%; }
+.field input[type="date"] { display: block; appearance: none; -webkit-appearance: none; }
+.field input[type="date"]::-webkit-date-and-time-value { text-align: left; min-height: 1.7em; }
+.photo[data-parallax="false"] .photo-plane { will-change: auto; }
+@media (hover: none), (pointer: coarse) {
+  .photo:hover img { transform: none; }
+  .photo-plane { transform: none !important; will-change: auto; }
+  ::view-transition-old(page-content) { animation: mobile-page-out 180ms ease-out both; }
+  ::view-transition-new(page-content) { animation: mobile-page-in 420ms ease-out 40ms both; }
+}
+@keyframes mobile-page-out { to { opacity: 0; } }
+@keyframes mobile-page-in { from { opacity: 0; } to { opacity: 1; } }
+@media (max-width: 1250px) {
+  :root { --mobile-header-height: calc(125px + env(safe-area-inset-top, 0px)); }
+  html { scroll-padding-top: calc(var(--mobile-header-height) + 16px); }
+  .header-slot { display: block; height: var(--mobile-header-height); }
+  .prototype-bar { position: relative; top: var(--mobile-header-height); }
+  .site-header {
+    position: fixed; inset: 0 0 auto; width: 100%;
+    padding-top: env(safe-area-inset-top, 0px);
+    background: var(--background); -webkit-backdrop-filter: none;
+    backdrop-filter: none; view-transition-name: none;
+  }
+  .header-inner, .is-compact .header-inner {
+    display: grid; grid-template-columns: 1fr auto auto;
+    height: 124px; min-height: 124px; padding-top: 10px;
+    gap: 0 10px; transition: none;
+  }
+  .brand-seal, .is-compact .brand-seal { width: 44px; height: 44px; transition: none; }
+  .language-switcher { grid-row: 2; grid-column: 1 / -1; justify-content: center; width: 100%; }
+  .language-switcher a { min-width: 48px; min-height: 36px; }
+  .mobile-nav { display: block; position: absolute; top: 100%; left: 0; right: 0; overflow: hidden; padding: 0; }
+  .mobile-nav-inner { overflow-y: auto; max-height: calc(100svh - var(--mobile-header-height)); }
+}

@@ -46,7 +46,10 @@ export function Header() {
   const header = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
   const { scrollY } = useScroll();
-  useMotionValueEvent(scrollY, "change", (value) => setCompact(value > 45));
+  useMotionValueEvent(scrollY, "change", (value) => {
+    // Hysteresis avoids repeatedly resizing the header near the threshold.
+    setCompact(previous => previous ? value > 16 : value > 80);
+  });
   useEffect(() => {
     if (!open) return;
     const previous = document.body.style.overflow;
@@ -83,7 +86,7 @@ export function Header() {
     };
   }, [open]);
   return (
-    <header
+    <div className="header-slot"><header
       ref={header}
       className={"site-header " + (compact ? "is-compact" : "")}
     >
@@ -154,7 +157,7 @@ export function Header() {
           <p><Text>{"Islamic League of Moldova"}</Text></p>
         </div>
       </LocalizedElement>
-    </header>
+    </header></div>
   );
 }
 
