@@ -1,4 +1,6 @@
 "use client";
+import { Text, LocalizedElement } from "@/i18n/client";
+
 import { useState } from "react";
 import { stories } from "@/content/site";
 import { StoryCard } from "./editorial";
@@ -9,17 +11,17 @@ export function NewsBrowser() {
   const reduced = useReducedMotion();
   return (
     <>
-      <div className="filter-bar" aria-label="Filter news">
-        {["All stories", "Community", "Announcements", "Advocacy"].map((c) => (
+      <LocalizedElement as={"div"} className="filter-bar" aria-label="Filter news">
+        <Text>{["All stories", "Community", "Announcements", "Advocacy"].map((c) => (
           <button
             key={c}
             onClick={() => setCategory(c)}
             aria-pressed={category === c}
           >
-            {c}
+            <Text>{c}</Text>
           </button>
-        ))}
-      </div>
+        ))}</Text>
+      </LocalizedElement>
       <motion.div
         key={category}
         className="news-grid"
@@ -28,11 +30,11 @@ export function NewsBrowser() {
         animate={reduced ? {} : { y: [18, 0] }}
         transition={{ duration: 0.45, ease: easeOut }}
       >
-        {stories
+        <Text>{stories
           .filter((s) => category === "All stories" || s.category === category)
           .map((s) => (
             <StoryCard key={s.slug} story={s} />
-          ))}
+          ))}</Text>
       </motion.div>
     </>
   );

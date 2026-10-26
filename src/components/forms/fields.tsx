@@ -1,4 +1,6 @@
 "use client";
+import { Text } from "@/i18n/client";
+
 import { useId, type InputHTMLAttributes, type ReactNode } from "react";
 import { Check } from "lucide-react";
 export function Field({
@@ -30,10 +32,10 @@ export function Field({
   return (
     <div className="field">
       <label htmlFor={name}>
-        {label}
-        {props.required && <span aria-hidden="true"> *</span>}
+        <Text>{label}</Text>
+        <Text>{props.required && <span aria-hidden="true"><Text>{" *"}</Text></span>}</Text>
       </label>
-      {multiline ? (
+      <Text>{multiline ? (
         <textarea
           {...shared}
           value={props.value}
@@ -43,19 +45,19 @@ export function Field({
         />
       ) : options ? (
         <select {...shared} value={props.value} onChange={props.onChange}>
-          <option value="">Choose an option</option>
-          {options.map((o) => (
-            <option key={o}>{o}</option>
-          ))}
+          <option value=""><Text>{"Choose an option"}</Text></option>
+          <Text>{options.map((o) => (
+            <option key={o} value={o}><Text>{o}</Text></option>
+          ))}</Text>
         </select>
       ) : (
         <input {...props} {...shared} />
-      )}{" "}
-      {error && (
+      )}<Text></Text>{" "}</Text>
+      <Text>{error && (
         <p className="field-error" id={`${name}-error`}>
-          {error}
+          <Text>{error}</Text>
         </p>
-      )}
+      )}</Text>
     </div>
   );
 }
@@ -83,13 +85,13 @@ export function Consent({
           aria-invalid={!!error}
           aria-describedby={error ? `${id}-error` : undefined}
         />
-        <span>{children}</span>
+        <span><Text>{children}</Text></span>
       </label>
-      {error && (
+      <Text>{error && (
         <p className="field-error" id={`${id}-error`}>
-          {error}
+          <Text>{error}</Text>
         </p>
-      )}
+      )}</Text>
     </div>
   );
 }
@@ -103,10 +105,8 @@ export function DemoFailure({
   const id = useId();
   return (
     <details className="demo-options">
-      <summary>Prototype testing options</summary>
-      <Consent id={id} checked={checked} onChange={onChange}>
-        Simulate a submission error
-      </Consent>
+      <summary><Text>{"Prototype testing options"}</Text></summary>
+      <Consent id={id} checked={checked} onChange={onChange}><Text>{"Simulate a submission error"}</Text></Consent>
     </details>
   );
 }
@@ -124,14 +124,10 @@ export function Success({
       <span className="success-mark" aria-hidden="true">
         <Check size={22} />
       </span>
-      <h2>{title}</h2>
-      <p>{children}</p>
-      <p className="prototype-note">
-        Preview complete. No data was sent to LIM or saved. No payment was made.
-      </p>
-      <button className="button button-outline" onClick={onReset}>
-        Start a new preview
-      </button>
+      <h2><Text>{title}</Text></h2>
+      <p><Text>{children}</Text></p>
+      <p className="prototype-note"><Text>{"Preview complete. No data was sent to LIM or saved. No payment was made."}</Text></p>
+      <button className="button button-outline" onClick={onReset}><Text>{"Start a new preview"}</Text></button>
     </div>
   );
 }

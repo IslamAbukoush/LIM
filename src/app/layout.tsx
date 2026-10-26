@@ -3,15 +3,16 @@ import { Manrope, Cormorant_Garamond } from "next/font/google";
 import { Header } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { PageTransitions } from "@/components/page-transitions";
+import { LocaleDocument, Text } from "@/i18n/client";
 import "./globals.css";
 import "./refinement.css";
 const sans = Manrope({
-  subsets: ["latin"],
+  subsets: ["latin", "cyrillic"],
   variable: "--font-sans",
   display: "swap",
 });
 const serif = Cormorant_Garamond({
-  subsets: ["latin"],
+  subsets: ["latin", "cyrillic"],
   weight: ["400", "500"],
   variable: "--font-serif",
   display: "swap",
@@ -38,25 +39,21 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      data-scroll-behavior="smooth"
+    <LocaleDocument
       className={`${sans.variable} ${serif.variable}`}
     >
-      <body>
         <a className="skip-link" href="#main">
-          Skip to content
+          <Text>Skip to content</Text>
         </a>
         <div className="prototype-bar">
-          Design preview{" "}
+          <Text>Design preview</Text>{" "}
           <span>
-            Illustrative content. Forms do not send data or collect payments.
+            <Text>Illustrative content. Forms do not send data or collect payments.</Text>
           </span>
         </div>
         <Header />
         <main id="main"><PageTransitions>{children}</PageTransitions></main>
         <Footer />
-      </body>
-    </html>
+    </LocaleDocument>
   );
 }

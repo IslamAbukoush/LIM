@@ -1,5 +1,6 @@
-import Link from "next/link";
-import Image from "next/image";
+import { Text } from "@/i18n/client";
+import { LocalizedLink as Link } from "@/i18n/client";
+import { LocalizedImage as Image } from "@/i18n/client";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { images } from "@/content/site";
 import type { ReactNode } from "react";
@@ -16,7 +17,7 @@ export function ActionLink({
 }) {
   return (
     <Link className={`button button-${variant}`} href={href}>
-      {children}
+      <Text>{children}</Text>
       <ArrowUpRight size={18} aria-hidden="true" />
     </Link>
   );
@@ -49,9 +50,9 @@ export function PageIntro({
 }) {
   return (
     <section className="container page-intro">
-      {label && <p className="section-label">{label}</p>}
-      <h1>{title}</h1>
-      <p className="lede">{description}</p>
+      <Text>{label && <p className="section-label"><Text>{label}</Text></p>}</Text>
+      <h1><Text>{title}</Text></h1>
+      <p className="lede"><Text>{description}</Text></p>
     </section>
   );
 }
@@ -60,21 +61,18 @@ export function PrototypeNote({
 }: {
   children?: ReactNode;
 }) {
-  return <p className="prototype-note">{children}</p>;
+  return <p className="prototype-note"><Text>{children}</Text></p>;
 }
 export function InvolvementCTA() {
   return (
     <section className="participation">
       <div className="container participation-inner">
         <div className="participation-intro">
-          <h2>Get involved.</h2>
-          <p>
-            Find a way to support the community, or get in touch with the
-            League.
-          </p>
+          <h2><Text>{"Get involved."}</Text></h2>
+          <p><Text>{"Find a way to support the community, or get in touch with the League."}</Text></p>
         </div>
         <div>
-          {[
+          <Text>{[
             {
               href: "/get-involved#volunteer",
               title: "Volunteer",
@@ -93,12 +91,12 @@ export function InvolvementCTA() {
           ].map((item) => (
             <Link className="participate-link" key={item.href} href={item.href}>
               <span>
-                <strong>{item.title}</strong>
-                <small>{item.body}</small>
+                <strong><Text>{item.title}</Text></strong>
+                <small><Text>{item.body}</Text></small>
               </span>
               <ArrowUpRight size={22} />
             </Link>
-          ))}
+          ))}</Text>
         </div>
       </div>
     </section>
@@ -107,7 +105,7 @@ export function InvolvementCTA() {
 export function TextArrow({ children }: { children: ReactNode }) {
   return (
     <span className="text-arrow">
-      {children}
+      <Text>{children}</Text>
       <ArrowRight size={18} aria-hidden="true" />
     </span>
   );

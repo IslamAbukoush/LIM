@@ -1,3 +1,4 @@
+import { Text } from "@/i18n/client";
 import { notFound } from "next/navigation";
 import { Download } from "lucide-react";
 import { reports } from "@/content/site";
@@ -30,36 +31,26 @@ export default async function Report({
       />
       <section className="container section report-detail">
         <div className="report-cover large">
-          <span>LIM / Design preview</span>
-          <h2>{r.title}</h2>
-          <span>{r.year} · Sample publication</span>
+          <span><Text>{"LIM / Design preview"}</Text></span>
+          <h2><Text>{r.title}</Text></h2>
+          <span><Text>{r.year}</Text><Text>{" · Sample publication"}</Text></span>
         </div>
         <div className="prose">
-          <PrototypeNote>
-            This is a publication template, not an official report. It contains
-            no research findings, statistics or recommendations from LIM.
-          </PrototypeNote>
-          <h2>Inside this sample</h2>
+          <PrototypeNote><Text>{"This is a publication template, not an official report. It contains no research findings, statistics or recommendations from LIM."}</Text></PrototypeNote>
+          <h2><Text>{"Inside this sample"}</Text></h2>
           <ol>
-            {r.sections.map((s) => (
-              <li key={s}>{s}</li>
-            ))}
+            <Text>{r.sections.map((s) => (
+              <li key={s}><Text>{s}</Text></li>
+            ))}</Text>
           </ol>
-          <p>
-            The PDF demonstrates a cover and contents layout. Official
-            publications can replace it through the future CMS.
-          </p>
+          <p><Text>{"The PDF demonstrates a cover and contents layout. Official publications can replace it through the future CMS."}</Text></p>
           <a
             href={`/reports/${r.slug}.pdf`}
             download
             className="button button-primary"
-          >
-            Download sample PDF
-            <Download size={18} />
+          ><Text>{"Download sample PDF"}</Text><Download size={18} />
           </a>
-          <ActionLink href="/advocacy" variant="text">
-            Back to publications
-          </ActionLink>
+          <ActionLink href="/advocacy" variant="text"><Text>{"Back to publications"}</Text></ActionLink>
         </div>
       </section>
     </>

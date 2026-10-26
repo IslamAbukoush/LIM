@@ -1,4 +1,7 @@
 "use client";
+import { LocalizedNumber } from "@/i18n/client";
+import { Text } from "@/i18n/client";
+
 import { useState } from "react";
 import { ArrowRight, LoaderCircle } from "lucide-react";
 import { Consent, DemoFailure, Field, Success } from "./fields";
@@ -55,22 +58,19 @@ export function DonationForm() {
           setConsent(false);
           setFailure(false);
         }}
-      >
-        You explored a {type.toLowerCase()} contribution of{" "}
-        {Number(amount).toLocaleString("en-GB")} MDL. This was a demonstration,
-        not a donation or pledge.
-      </Success>
+      ><Text>{"You explored a "}</Text><Text>{type}</Text><Text>{" contribution of"}</Text><Text>{" "}</Text>
+        <Text><LocalizedNumber value={Number(amount)}/></Text><Text>{" MDL. This was a demonstration, not a donation or pledge."}</Text></Success>
     );
   return (
     <form onSubmit={submit} noValidate>
       <fieldset disabled={busy}>
         <FormTransition state={step}>
-          {step === 0 ? (
+          <Text>{step === 0 ? (
             <>
               <fieldset className="choice-fieldset">
-                <legend>Choose your giving</legend>
+                <legend><Text>{"Choose your giving"}</Text></legend>
                 <div className="choice-row">
-                  {["Zakat", "Sadaqah", "General support"].map((t) => (
+                  <Text>{["Zakat", "Sadaqah", "General support"].map((t) => (
                     <label className="choice" key={t}>
                       <input
                         type="radio"
@@ -79,17 +79,16 @@ export function DonationForm() {
                         checked={type === t}
                         onChange={() => setType(t)}
                       />
-                      <span>{t}</span>
+                      <span><Text>{t}</Text></span>
                     </label>
-                  ))}
+                  ))}</Text>
                 </div>
               </fieldset>
               <fieldset className="choice-fieldset">
-                <legend>
-                  Choose an amount <span className="muted">(MDL)</span>
+                <legend><Text>{"Choose an amount "}</Text><span className="muted"><Text>{"(MDL)"}</Text></span>
                 </legend>
                 <div className="amount-grid">
-                  {["100", "250", "500", "1000"].map((a) => (
+                  <Text>{["100", "250", "500", "1000"].map((a) => (
                     <button
                       type="button"
                       key={a}
@@ -99,9 +98,9 @@ export function DonationForm() {
                         setAmount(a);
                       }}
                     >
-                      {Number(a).toLocaleString("en-GB")}
+                      <Text><LocalizedNumber value={Number(a)}/></Text>
                     </button>
-                  ))}
+                  ))}</Text>
                   <button
                     type="button"
                     aria-pressed={custom}
@@ -109,12 +108,10 @@ export function DonationForm() {
                       setCustom(true);
                       setAmount("");
                     }}
-                  >
-                    Custom
-                  </button>
+                  ><Text>{"Custom"}</Text></button>
                 </div>
               </fieldset>
-              {custom && (
+              <Text>{custom && (
                 <Field
                   label="Custom amount (MDL)"
                   name="custom-amount"
@@ -126,47 +123,38 @@ export function DonationForm() {
                   required
                   error={error || undefined}
                 />
-              )}
-              <p className="form-hint">
-                A one-time contribution preview. Zakat allocation and
-                eligibility information will be confirmed by LIM before launch.
-              </p>
+              )}</Text>
+              <p className="form-hint"><Text>{"A one-time contribution preview. Zakat allocation and eligibility information will be confirmed by LIM before launch."}</Text></p>
             </>
           ) : (
             <>
-              <h3>Review your contribution</h3>
+              <h3><Text>{"Review your contribution"}</Text></h3>
               <dl className="review-list">
                 <div>
-                  <dt>Giving type</dt>
-                  <dd>{type}</dd>
+                  <dt><Text>{"Giving type"}</Text></dt>
+                  <dd><Text>{type}</Text></dd>
                 </div>
                 <div>
-                  <dt>Amount</dt>
-                  <dd>{Number(amount).toLocaleString("en-GB")} MDL</dd>
+                  <dt><Text>{"Amount"}</Text></dt>
+                  <dd><Text><LocalizedNumber value={Number(amount)}/></Text><Text>{" MDL"}</Text></dd>
                 </div>
                 <div>
-                  <dt>Frequency</dt>
-                  <dd>One time</dd>
+                  <dt><Text>{"Frequency"}</Text></dt>
+                  <dd><Text>{"One time"}</Text></dd>
                 </div>
               </dl>
-              <p>
-                No payment details are needed. The production website will
-                connect to an approved payment provider.
-              </p>
-              <Consent checked={consent} onChange={setConsent}>
-                I understand that this preview does not make a payment or create
-                a pledge.
-              </Consent>
+              <p><Text>{"No payment details are needed. The production website will connect to an approved payment provider."}</Text></p>
+              <Consent checked={consent} onChange={setConsent}><Text>{"I understand that this preview does not make a payment or create a pledge."}</Text></Consent>
               <DemoFailure checked={failure} onChange={setFailure} />
             </>
-          )}
-          {error && (
+          )}</Text>
+          <Text>{error && (
             <p className="error-summary" role="alert">
-              {error}
+              <Text>{error}</Text>
             </p>
-          )}
+          )}</Text>
           <div className="actions">
-            {step === 1 && (
+            <Text>{step === 1 && (
               <button
                 type="button"
                 className="button button-outline"
@@ -174,22 +162,18 @@ export function DonationForm() {
                   setStep(0);
                   setError("");
                 }}
-              >
-                Edit amount
-              </button>
-            )}
+              ><Text>{"Edit amount"}</Text></button>
+            )}</Text>
             <button className="button button-primary" type="submit">
-              {busy ? (
+              <Text>{busy ? (
                 <>
-                  <LoaderCircle size={18} className="spin" />
-                  Finishing preview…
-                </>
+                  <LoaderCircle size={18} className="spin" /><Text>{"Finishing preview…"}</Text></>
               ) : (
                 <>
-                  {step === 0 ? "Review contribution" : "Complete demo"}
+                  <Text>{step === 0 ? "Review contribution" : "Complete demo"}</Text>
                   <ArrowRight size={18} />
                 </>
-              )}
+              )}</Text>
             </button>
           </div>
         </FormTransition>

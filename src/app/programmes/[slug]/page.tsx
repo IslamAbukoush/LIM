@@ -1,3 +1,4 @@
+import { Text } from "@/i18n/client";
 import { notFound } from "next/navigation";
 import { programmes } from "@/content/site";
 import { PageIntro, Photo, ActionLink, PrototypeNote } from "@/components/ui";
@@ -34,28 +35,21 @@ export default async function Programme({
       </div>
       <section className="container section split-editorial">
         <div>
-          <h2>Here for our community.</h2>
-          <PrototypeNote>
-            Illustrative programme. Availability and eligibility are not yet
-            confirmed.
-          </PrototypeNote>
+          <h2><Text>{"Here for our community."}</Text></h2>
+          <PrototypeNote><Text>{"Illustrative programme. Availability and eligibility are not yet confirmed."}</Text></PrototypeNote>
         </div>
         <div className="prose">
-          <p className="lede">{p.body}</p>
-          <h3>Who this page is for</h3>
-          <p>{p.audience}</p>
-          <h3>Potential areas of support</h3>
+          <p className="lede"><Text>{p.body}</Text></p>
+          <h3><Text>{"Who this page is for"}</Text></h3>
+          <p><Text>{p.audience}</Text></p>
+          <h3><Text>{"Potential areas of support"}</Text></h3>
           <ul>
-            {p.assistance.map((a) => (
-              <li key={a}>{a}</li>
-            ))}
+            <Text>{p.assistance.map((a) => (
+              <li key={a}><Text>{a}</Text></li>
+            ))}</Text>
           </ul>
-          <ActionLink href="/get-involved#contact">
-            Ask about this area
-          </ActionLink>
-          <ActionLink href="/programmes" variant="text">
-            All programmes
-          </ActionLink>
+          <ActionLink href="/get-involved#contact"><Text>{"Ask about this area"}</Text></ActionLink>
+          <ActionLink href="/programmes" variant="text"><Text>{"All programmes"}</Text></ActionLink>
         </div>
       </section>
     </>

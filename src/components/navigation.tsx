@@ -1,7 +1,9 @@
 "use client";
-import Link from "next/link";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { Text, LocalizedElement } from "@/i18n/client";
+
+import { LocalizedLink as Link } from "@/i18n/client";
+import { LocalizedImage as Image } from "@/i18n/client";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import {
   motion,
@@ -12,7 +14,12 @@ import {
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { navigation } from "@/content/site";
 import { easeOut } from "./motion";
+import { useLocale } from "@/i18n/client";
+import { stripLocale, languageNames, localizedHref, type Locale } from "@/i18n/config";
+import NextLink from "next/link";
 export function Brand() {
+ const locale = useLocale();
+ const names = { en: ["Islamic League of", "Moldova"], ro: ["Liga Islamic\u0103 din", "Republica Moldova"], ru: ["\u0418\u0441\u043b\u0430\u043c\u0441\u043a\u0430\u044f \u043b\u0438\u0433\u0430", "\u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0438 \u041c\u043e\u043b\u0434\u043e\u0432\u0430"] };
   return (
     <Link
       className="brand"
@@ -27,14 +34,12 @@ export function Brand() {
         alt=""
         priority
       />
-      <span className="brand-wordmark" lang="ro">
-        Liga Islamică din<span>Republica Moldova</span>
-      </span>
+      <span className="brand-wordmark" lang={locale}>{names[locale][0]}<span>{names[locale][1]}</span></span>
     </Link>
   );
 }
 export function Header() {
-  const pathname = usePathname();
+  const pathname = stripLocale(usePathname());
   const [open, setOpen] = useState(false);
   const [compact, setCompact] = useState(false);
   const trigger = useRef<HTMLButtonElement>(null);
@@ -67,7 +72,7 @@ export function Header() {
       }
     };
     const resize = () => {
-      if (window.innerWidth > 960) setOpen(false);
+      if (window.innerWidth > 1250) setOpen(false);
     };
     document.addEventListener("keydown", handle);
     window.addEventListener("resize", resize);
@@ -84,23 +89,22 @@ export function Header() {
     >
       <div className="container header-inner">
         <Brand />
-        <nav className="desktop-nav" aria-label="Main navigation">
-          {navigation.map((n) => (
+        <LocalizedElement as={"nav"} className="desktop-nav" aria-label="Main navigation">
+          <Text>{navigation.map((n) => (
             <Link
               key={n.href}
               href={n.href}
               aria-current={pathname.startsWith(n.href) ? "page" : undefined}
             >
-              {n.label}
+              <Text>{n.label}</Text>
               <span className="nav-rule" />
             </Link>
-          ))}
-        </nav>
-        <Link href="/get-involved#donate" className="header-donate">
-          Give Zakat
-          <ArrowUpRight size={16} />
+          ))}</Text>
+        </LocalizedElement>
+        <Link href="/get-involved#donate" className="header-donate"><Text>{"Give Zakat"}</Text><ArrowUpRight size={16} />
         </Link>
-        <button
+        <LanguageSwitcher />
+        <LocalizedElement as={"button"}
           className="menu-toggle"
           ref={trigger}
           onClick={() => setOpen(!open)}
@@ -108,10 +112,10 @@ export function Header() {
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
         >
-          {open ? <X /> : <Menu />}
-        </button>
+          <Text>{open ? <X /> : <Menu />}</Text>
+        </LocalizedElement>
       </div>
-      <motion.nav
+      <LocalizedElement as={motion.nav}
         id="mobile-nav"
         className="mobile-nav"
         aria-label="Mobile navigation"
@@ -122,7 +126,7 @@ export function Header() {
         transition={{ duration: reduced ? 0 : 0.45, ease: easeOut }}
       >
         <div className="mobile-nav-inner">
-          {[
+          <Text>{[
             { href: "/", label: "Home" },
             ...navigation,
             { href: "/report-discrimination", label: "Report discrimination" },
@@ -142,14 +146,16 @@ export function Header() {
                 onClick={() => setOpen(false)}
                 aria-current={pathname === n.href ? "page" : undefined}
               >
-                {n.label}
+                <Text>{n.label}</Text>
                 <ArrowUpRight size={20} />
               </Link>
             </motion.div>
-          ))}
-          <p>Islamic League of Moldova</p>
+          ))}</Text>
+          <p><Text>{"Islamic League of Moldova"}</Text></p>
         </div>
-      </motion.nav>
+      </LocalizedElement>
     </header>
   );
 }
+
+function LanguageSwitcher() { const router=useRouter(); const locale=useLocale();const pathname=usePathname();return <nav className="language-switcher" aria-label={locale==='ro'?'Limba':locale==='ru'?'\u042f\u0437\u044b\u043a':'Language'}>{(['en','ro','ru'] as Locale[]).map(lang=><NextLink key={lang} href={localizedHref(stripLocale(pathname),lang)} hrefLang={lang} lang={lang} aria-label={languageNames[lang]} aria-current={locale===lang?'true':undefined} onClick={event=>{if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;event.preventDefault();router.push(localizedHref(stripLocale(window.location.pathname),lang)+window.location.search+window.location.hash);}}>{lang.toUpperCase()}</NextLink>)}</nav>;}

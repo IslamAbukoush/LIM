@@ -1,3 +1,4 @@
+import { Text } from "@/i18n/client";
 import type { Metadata } from "next";
 import { PageIntro, Photo, ActionLink, PrototypeNote } from "@/components/ui";
 import { NewsBrowser } from "@/components/news-browser";
@@ -15,19 +16,14 @@ export default function News() {
       <section className="container featured-story">
         <Photo name={s.image} priority />
         <div>
-          <p className="section-label">Featured · Sample story</p>
-          <h2>{s.title}</h2>
-          <p className="lede">{s.excerpt}</p>
-          <ActionLink href={`/news/${s.slug}`} variant="text">
-            Read the story
-          </ActionLink>
+          <p className="section-label"><Text>{"Featured · Sample story"}</Text></p>
+          <h2><Text>{s.title}</Text></h2>
+          <p className="lede"><Text>{s.excerpt}</Text></p>
+          <ActionLink href={`/news/${s.slug}`} variant="text"><Text>{"Read the story"}</Text></ActionLink>
         </div>
       </section>
       <section className="container section">
-        <PrototypeNote>
-          All stories and publication dates are examples for design review, not
-          accounts of real LIM events.
-        </PrototypeNote>
+        <PrototypeNote><Text>{"All stories and publication dates are examples for design review, not accounts of real LIM events."}</Text></PrototypeNote>
         <NewsBrowser />
       </section>
     </>

@@ -1,5 +1,7 @@
-import Link from "next/link";
-import Image from "next/image";
+import { LocalizedDate } from "@/i18n/client";
+import { Text } from "@/i18n/client";
+import { LocalizedLink as Link } from "@/i18n/client";
+import { LocalizedImage as Image } from "@/i18n/client";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import {
   ActionLink,
@@ -14,27 +16,17 @@ export default function Home() {
     <>
       <section className="container home-hero">
         <div className="hero-copy">
-          <p className="hero-location">Islamic League of Moldova</p>
-          <h1>
-            A community.
-            <br />A place to belong.
-          </h1>
-          <p className="lede">
-            Faith, community life and a shared commitment to dignity in the
-            Republic of Moldova.
-          </p>
+          <p className="hero-location"><Text>{"Islamic League of Moldova"}</Text></p>
+          <h1><Text>{"A community."}</Text><br /><Text>{"A place to belong."}</Text></h1>
+          <p className="lede"><Text>{"Faith, community life and a shared commitment to dignity in the Republic of Moldova."}</Text></p>
           <div className="actions">
-            <ActionLink href="/programmes">Explore our work</ActionLink>
-            <ActionLink href="/about" variant="text">
-              About the League
-            </ActionLink>
+            <ActionLink href="/programmes"><Text>{"Explore our work"}</Text></ActionLink>
+            <ActionLink href="/about" variant="text"><Text>{"About the League"}</Text></ActionLink>
           </div>
           <a className="hero-discover" href="#mission">
             <span className="scroll-cue">
               <ArrowDown size={17} />
-            </span>
-            Discover LIM
-          </a>
+            </span><Text>{"Discover LIM"}</Text></a>
         </div>
         <div className="hero-visual">
           <Photo
@@ -43,8 +35,8 @@ export default function Home() {
             sizes="(max-width:700px) 100vw,55vw"
           />
           <div className="hero-caption">
-            <span>Community, in everyday life</span>
-            <span>AI illustration · Fictional gathering</span>
+            <span><Text>{"Community, in everyday life"}</Text></span>
+            <span><Text>{"AI illustration · Fictional gathering"}</Text></span>
           </div>
         </div>
       </section>
@@ -56,124 +48,75 @@ export default function Home() {
             height={120}
             alt="LIM emblem"
           />
-          <p className="section-label">About the League</p>
+          <p className="section-label"><Text>{"About the League"}</Text></p>
         </div>
         <div>
-          <h2>
-            Making room for faith
-            <br />
-            in our shared society.
-          </h2>
+          <h2><Text>{"Making room for faith"}</Text><br /><Text>{"in our shared society."}</Text></h2>
           <div className="mission-bottom">
-            <p>
-              This platform brings together the League’s proposed areas of
-              community work, information about faith and belonging, and a way
-              to share experiences of discrimination.
-            </p>
-            <ActionLink href="/about" variant="text">
-              Our mission
-            </ActionLink>
+            <p><Text>{"This platform brings together the League’s proposed areas of community work, information about faith and belonging, and a way to share experiences of discrimination."}</Text></p>
+            <ActionLink href="/about" variant="text"><Text>{"Our mission"}</Text></ActionLink>
           </div>
         </div>
       </section>
       <section className="work-section">
         <div className="container section work-grid">
           <div className="work-introduction">
-            <p className="section-label">Programmes & services</p>
-            <h2>
-              Where we
-              <br />
-              can contribute.
-            </h2>
-            <p>
-              Practical care, opportunities to learn, and spaces to connect.
-            </p>
-            <ActionLink href="/programmes" variant="text">
-              Explore all programmes
-            </ActionLink>
-            <PrototypeNote>
-              Proposed programme areas. Availability is not yet confirmed.
-            </PrototypeNote>
+            <p className="section-label"><Text>{"Programmes & services"}</Text></p>
+            <h2><Text>{"Where we"}</Text><br /><Text>{"can contribute."}</Text></h2>
+            <p><Text>{"Practical care, opportunities to learn, and spaces to connect."}</Text></p>
+            <ActionLink href="/programmes" variant="text"><Text>{"Explore all programmes"}</Text></ActionLink>
+            <PrototypeNote><Text>{"Proposed programme areas. Availability is not yet confirmed."}</Text></PrototypeNote>
           </div>
           <ProgrammeList />
         </div>
       </section>
       <section className="container section advocacy-editorial">
         <div>
-          <p className="section-label">Representation & advocacy</p>
-          <h2>
-            A clear way to
-            <br />
-            share your experience.
-          </h2>
+          <p className="section-label"><Text>{"Representation & advocacy"}</Text></p>
+          <h2><Text>{"A clear way to"}</Text><br /><Text>{"share your experience."}</Text></h2>
         </div>
         <div>
-          <p>
-            If you have experienced discrimination, the proposed reporting
-            process gives you time to explain what happened and review what you
-            share.
-          </p>
-          <ActionLink href="/report-discrimination">
-            Report discrimination
-          </ActionLink>
-          <Link className="under-link" href="/advocacy">
-            Research & publications
-            <ArrowUpRight size={16} />
+          <p><Text>{"If you have experienced discrimination, the proposed reporting process gives you time to explain what happened and review what you share."}</Text></p>
+          <ActionLink href="/report-discrimination"><Text>{"Report discrimination"}</Text></ActionLink>
+          <Link className="under-link" href="/advocacy"><Text>{"Research & publications"}</Text><ArrowUpRight size={16} />
           </Link>
-          <PrototypeNote>
-            Explore the demo. No report is sent or stored.
-          </PrototypeNote>
+          <PrototypeNote><Text>{"Explore the demo. No report is sent or stored."}</Text></PrototypeNote>
         </div>
       </section>
       <section className="mosque-feature">
         <Photo name="architecture" sizes="100vw" />
         <div className="mosque-shade" />
         <div className="container mosque-content">
-          <p className="section-label">National Mosque Project</p>
-          <h2>
-            A shared place
-            <br />
-            for the years ahead.
-          </h2>
-          <p>
-            The vision for a place of worship, learning and community in
-            Moldova.
-          </p>
-          <ActionLink href="/mosque-project" variant="light">
-            Explore the project
-          </ActionLink>
-          <span className="mosque-caption">
-            Architectural inspiration · Alhambra, Spain · Not a project design
-          </span>
+          <p className="section-label"><Text>{"National Mosque Project"}</Text></p>
+          <h2><Text>{"A shared place"}</Text><br /><Text>{"for the years ahead."}</Text></h2>
+          <p><Text>{"The vision for a place of worship, learning and community in Moldova."}</Text></p>
+          <ActionLink href="/mosque-project" variant="light"><Text>{"Explore the project"}</Text></ActionLink>
+          <span className="mosque-caption"><Text>{"Architectural inspiration · Alhambra, Spain · Not a project design"}</Text></span>
         </div>
       </section>
       <section className="container section">
         <div className="section-heading">
           <div>
-            <p className="section-label">News & announcements</p>
-            <h2>From the journal.</h2>
+            <p className="section-label"><Text>{"News & announcements"}</Text></p>
+            <h2><Text>{"From the journal."}</Text></h2>
           </div>
-          <ActionLink href="/news" variant="text">
-            All stories
-          </ActionLink>
+          <ActionLink href="/news" variant="text"><Text>{"All stories"}</Text></ActionLink>
         </div>
         <div className="journal-layout">
           <StoryCard story={stories[0]} />
           <div className="journal-list">
-            {stories.slice(1).map((story) => (
+            <Text>{stories.slice(1).map((story) => (
               <article className="journal-row" key={story.slug}>
-                <p className="story-meta">{story.category} · Sample story</p>
+                <p className="story-meta"><Text>{story.category}</Text><Text>{" · Sample story"}</Text></p>
                 <Link href={`/news/${story.slug}`}>
-                  <h3>{story.title}</h3>
+                  <h3><Text>{story.title}</Text></h3>
                   <ArrowUpRight size={22} />
                 </Link>
-                <p>{story.excerpt}</p>
-                <time dateTime={story.date}>{story.date} · Example date</time>
+                <p><Text>{story.excerpt}</Text></p>
+                <time dateTime={story.date}><Text><LocalizedDate value={story.date}/></Text><Text>{" · Example date"}</Text></time>
               </article>
-            ))}
-            <p className="journal-note">
-              Illustrative editorial content for design review.
-            </p>
+            ))}</Text>
+            <p className="journal-note"><Text>{"Illustrative editorial content for design review."}</Text></p>
           </div>
         </div>
       </section>

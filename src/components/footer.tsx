@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { Text } from "@/i18n/client";
+import { LocalizedLink as Link } from "@/i18n/client";
 import { Brand } from "./navigation";
 import { navigation } from "@/content/site";
 export function Footer() {
@@ -7,42 +8,34 @@ export function Footer() {
       <div className="container footer-grid">
         <div>
           <Brand />
-          <p>
-            A vision of a welcoming community,
-            <br />
-            rooted in faith and shared dignity.
-          </p>
-          <p className="footer-small">
-            Moldova
-            <br />
-            Official contact details coming soon.
-          </p>
+          <p><Text>{"A vision of a welcoming community,"}</Text><br /><Text>{"rooted in faith and shared dignity."}</Text></p>
+          <p className="footer-small"><Text>{"Moldova"}</Text><br /><Text>{"Official contact details coming soon."}</Text></p>
         </div>
         <div>
-          <h2>Explore</h2>
-          {navigation.slice(0, 5).map((n) => (
+          <h2><Text>{"Explore"}</Text></h2>
+          <Text>{navigation.slice(0, 5).map((n) => (
             <Link key={n.href} href={n.href}>
-              {n.label}
+              <Text>{n.label}</Text>
             </Link>
-          ))}
+          ))}</Text>
         </div>
         <div>
-          <h2>Take part</h2>
-          <Link href="/get-involved#volunteer">Volunteer</Link>
-          <Link href="/get-involved#donate">Donate / Zakat</Link>
-          <Link href="/report-discrimination">Report discrimination</Link>
-          <Link href="/get-involved#contact">Contact us</Link>
+          <h2><Text>{"Take part"}</Text></h2>
+          <Link href="/get-involved#volunteer"><Text>{"Volunteer"}</Text></Link>
+          <Link href="/get-involved#donate"><Text>{"Donate / Zakat"}</Text></Link>
+          <Link href="/report-discrimination"><Text>{"Report discrimination"}</Text></Link>
+          <Link href="/get-involved#contact"><Text>{"Contact us"}</Text></Link>
         </div>
         <div>
-          <h2>Stay connected</h2>
-          <p>Official social channels will be linked here once confirmed.</p>
-          <Link href="/news">Read the journal</Link>
-          <Link href="/privacy">Privacy & prototype terms</Link>
+          <h2><Text>{"Stay connected"}</Text></h2>
+          <p><Text>{"Official social channels will be linked here once confirmed."}</Text></p>
+          <Link href="/news"><Text>{"Read the journal"}</Text></Link>
+          <Link href="/privacy"><Text>{"Privacy & prototype terms"}</Text></Link>
         </div>
       </div>
       <div className="container footer-bottom">
-        <span>© 2026 Islamic League of Moldova</span>
-        <span>Design prototype · Illustrative content and imagery</span>
+        <span><Text>{"© 2026 Islamic League of Moldova"}</Text></span>
+        <span><Text>{"Design prototype · Illustrative content and imagery"}</Text></span>
       </div>
     </footer>
   );

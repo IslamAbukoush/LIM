@@ -76,7 +76,7 @@ test("Logo is supplied identity and mobile menu preserves keyboard control", asy
     "/brand/lim-seal.webp",
   );
   await expect(page.locator(".site-header .brand-wordmark")).toContainText(
-    "Liga Islamică din",
+    "Islamic League of",
   );
   await page.getByRole("button", { name: "Open menu" }).click();
   await page

@@ -1,5 +1,7 @@
 "use client";
-import Link from "next/link";
+import { Text, LocalizedElement } from "@/i18n/client";
+
+import { LocalizedLink as Link } from "@/i18n/client";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, LoaderCircle } from "lucide-react";
 import { Field, Consent, DemoFailure, Success, validEmail } from "./fields";
@@ -102,43 +104,34 @@ export function ReportForm() {
           setConsent(false);
           setFailure(false);
         }}
-      >
-        No case has been submitted and no response will follow. In the live
-        service, this screen will explain the reference number and agreed next
-        steps.
-      </Success>
+      ><Text>{"No case has been submitted and no response will follow. In the live service, this screen will explain the reference number and agreed next steps."}</Text></Success>
     );
   return (
     <div className="report-form">
-      <ol className="stepper" aria-label="Reporting progress">
-        {steps.map((s, i) => (
+      <LocalizedElement as={"ol"} className="stepper" aria-label="Reporting progress">
+        <Text>{steps.map((s, i) => (
           <li key={s} aria-current={step === i ? "step" : undefined}>
-            <span>{i + 1}</span>
-            {s}
+            <span><Text>{i + 1}</Text></span>
+            <Text>{s}</Text>
           </li>
-        ))}
-      </ol>
+        ))}</Text>
+      </LocalizedElement>
       <form onSubmit={submit} noValidate>
         <h2 ref={heading} tabIndex={-1}>
-          {steps[step]}
+          <Text>{steps[step]}</Text>
         </h2>
-        <p className="form-hint">
-          Step {step + 1} of 3 · Please use fictional information. Entries
-          disappear when you leave or reload this page.
-        </p>
-        {Object.keys(errors).length > 0 && (
+        <p className="form-hint"><Text>{"Step "}</Text><Text>{step + 1}</Text><Text>{" of 3 · Please use fictional information. Entries disappear when you leave or reload this page."}</Text></p>
+        <Text>{Object.keys(errors).length > 0 && (
           <div
             className="error-summary"
             role="alert"
             ref={summary}
             tabIndex={-1}
-          >
-            Please check the highlighted fields before continuing.
-          </div>
-        )}
+          ><Text>{"Please check the highlighted fields before continuing."}</Text></div>
+        )}</Text>
         <fieldset disabled={busy}>
           <FormTransition state={step}>
-            {step === 0 && (
+            <Text>{step === 0 && (
               <>
                 <Field
                   {...bind("type")}
@@ -176,19 +169,12 @@ export function ReportForm() {
                   label="Additional context (optional)"
                   multiline
                 />
-                <p className="form-hint">
-                  Please avoid names of other people, identity numbers or
-                  sensitive documents. File uploads are not enabled in this
-                  prototype.
-                </p>
+                <p className="form-hint"><Text>{"Please avoid names of other people, identity numbers or sensitive documents. File uploads are not enabled in this prototype."}</Text></p>
               </>
-            )}
+            )}</Text>
             {step === 1 && (
               <>
-                <p>
-                  You can explore the form without providing your name or
-                  contact details.
-                </p>
+                <p><Text>{"You can explore the form without providing your name or contact details."}</Text></p>
                 <Field
                   {...bind("preference")}
                   label="Contact preference"
@@ -210,23 +196,17 @@ export function ReportForm() {
                   required={values.preference === "Email"}
                   autoComplete="email"
                 />
-                <p className="form-hint">
-                  No email will be sent. These preferences only demonstrate the
-                  future workflow.
-                </p>
+                <p className="form-hint"><Text>{"No email will be sent. These preferences only demonstrate the future workflow."}</Text></p>
               </>
             )}
             {step === 2 && (
               <>
-                <p>
-                  Take a moment to review your entries. You can go back and
-                  change anything.
-                </p>
+                <p><Text>{"Take a moment to review your entries. You can go back and change anything."}</Text></p>
                 <dl className="review-list">
                   {Object.entries(labels).map(([key, label]) => (
                     <div key={key}>
-                      <dt>{label}</dt>
-                      <dd>{values[key]?.trim() || "Not provided"}</dd>
+                      <dt><Text>{label}</Text></dt>
+                      <dd>{values[key]?.trim() ? (["type", "preference"].includes(key) ? <Text>{values[key]}</Text> : values[key]) : <Text>Not provided</Text>}</dd>
                     </div>
                   ))}
                 </dl>
@@ -234,24 +214,19 @@ export function ReportForm() {
                   checked={consent}
                   onChange={setConsent}
                   error={errors.consent}
-                >
-                  I understand this is a design prototype. This does not submit
-                  a real report, store my entries or request assistance.
-                </Consent>
-                <p className="form-hint">
-                  Read the{" "}
-                  <Link href="/privacy">prototype privacy information</Link>.
-                </p>
+                ><Text>{"I understand this is a design prototype. This does not submit a real report, store my entries or request assistance."}</Text></Consent>
+                <p className="form-hint"><Text>{"Read the"}</Text><Text>{" "}</Text>
+                  <Link href="/privacy"><Text>{"prototype privacy information"}</Text></Link><Text>{"."}</Text></p>
                 <DemoFailure checked={failure} onChange={setFailure} />
               </>
             )}
-            {submitError && (
+            <Text>{submitError && (
               <p className="error-summary" role="alert">
-                {submitError}
+                <Text>{submitError}</Text>
               </p>
-            )}
+            )}</Text>
             <div className="form-navigation">
-              {step > 0 && (
+              <Text>{step > 0 && (
                 <button
                   type="button"
                   className="button button-outline"
@@ -260,22 +235,18 @@ export function ReportForm() {
                     setErrors({});
                     setSubmitError("");
                   }}
-                >
-                  Back
-                </button>
-              )}
+                ><Text>{"Back"}</Text></button>
+              )}</Text>
               <button className="button button-primary" type="submit">
-                {busy ? (
+                <Text>{busy ? (
                   <>
-                    <LoaderCircle size={18} className="spin" />
-                    Completing preview…
-                  </>
+                    <LoaderCircle size={18} className="spin" /><Text>{"Completing preview…"}</Text></>
                 ) : (
                   <>
-                    {step === 2 ? "Finish demo" : "Continue"}
+                    <Text>{step === 2 ? "Finish demo" : "Continue"}</Text>
                     <ArrowRight size={18} />
                   </>
-                )}
+                )}</Text>
               </button>
             </div>
           </FormTransition>

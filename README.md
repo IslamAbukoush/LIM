@@ -22,6 +22,8 @@ The production build exports to `out/`. Serve this directory using any static ho
 
 ## Pages
 
+Every content page is also available under `/ro/` (Romanian) and `/ru/` (Russian). The language switcher preserves the current page and section. See [internationalization notes](docs/INTERNATIONALIZATION.md) for translations, localized branding and the English sample PDF boundary.
+
 - `/` — mission, work, advocacy, mosque project, stories and involvement
 - `/about/` — proposed mission and values
 - `/programmes/` and `/programmes/[slug]/` — three illustrative programme areas

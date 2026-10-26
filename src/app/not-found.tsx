@@ -1,3 +1,4 @@
+import { Text } from "@/i18n/client";
 import { PageIntro, ActionLink } from "@/components/ui";
 export default function NotFound() {
   return (
@@ -7,7 +8,7 @@ export default function NotFound() {
         title="This page isn’t here."
         description="The page may have moved, or the address may be incomplete."
       />
-      <ActionLink href="/">Return home</ActionLink>
+      <ActionLink href="/"><Text>{"Return home"}</Text></ActionLink>
     </div>
   );
 }

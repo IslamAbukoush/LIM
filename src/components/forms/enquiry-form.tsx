@@ -1,4 +1,6 @@
 "use client";
+import { Text } from "@/i18n/client";
+
 import { useRef, useState } from "react";
 import { ArrowUpRight, LoaderCircle } from "lucide-react";
 import { Field, Consent, DemoFailure, Success, validEmail } from "./fields";
@@ -69,21 +71,17 @@ export function EnquiryForm({ kind }: { kind: "contact" | "volunteer" }) {
           setFailure(false);
         }}
       >
-        {volunteer
+        <Text>{volunteer
           ? "Your sample application is complete. In the live service, this is where the team’s next steps would be explained."
-          : "Your sample enquiry is complete. The live service will explain how and when the team can respond."}
+          : "Your sample enquiry is complete. The live service will explain how and when the team can respond."}</Text>
       </Success>
     );
   return (
     <form onSubmit={submit} noValidate className="enquiry-form">
-      <p className="form-hint">
-        Fields marked * are required. Please use fictional details.
-      </p>
-      {Object.keys(errors).length > 0 && (
-        <div className="error-summary" role="alert" tabIndex={-1} ref={summary}>
-          Please check the highlighted fields before continuing.
-        </div>
-      )}
+      <p className="form-hint"><Text>{"Fields marked * are required. Please use fictional details."}</Text></p>
+      <Text>{Object.keys(errors).length > 0 && (
+        <div className="error-summary" role="alert" tabIndex={-1} ref={summary}><Text>{"Please check the highlighted fields before continuing."}</Text></div>
+      )}</Text>
       <fieldset disabled={status === "loading"}>
         <div className="form-grid">
           <Field
@@ -100,7 +98,7 @@ export function EnquiryForm({ kind }: { kind: "contact" | "volunteer" }) {
             autoComplete="email"
           />
         </div>
-        {volunteer && (
+        <Text>{volunteer && (
           <>
             <Field
               {...bind("phone")}
@@ -139,8 +137,8 @@ export function EnquiryForm({ kind }: { kind: "contact" | "volunteer" }) {
               multiline
             />
           </>
-        )}
-        {!volunteer && (
+        )}</Text>
+        <Text>{!volunteer && (
           <Field
             {...bind("subject")}
             label="Topic (optional)"
@@ -152,7 +150,7 @@ export function EnquiryForm({ kind }: { kind: "contact" | "volunteer" }) {
               "Other",
             ]}
           />
-        )}
+        )}</Text>
         <Field
           {...bind("message")}
           label={
@@ -166,28 +164,23 @@ export function EnquiryForm({ kind }: { kind: "contact" | "volunteer" }) {
           checked={consent}
           onChange={setConsent}
           error={errors.consent}
-        >
-          I understand this is a prototype and my entries will not be sent or
-          saved.
-        </Consent>
+        ><Text>{"I understand this is a prototype and my entries will not be sent or saved."}</Text></Consent>
         <DemoFailure checked={failure} onChange={setFailure} />
-        {submitError && (
+        <Text>{submitError && (
           <p className="error-summary" role="alert">
-            {submitError}
+            <Text>{submitError}</Text>
           </p>
-        )}
+        )}</Text>
         <button className="button button-primary" type="submit">
-          {status === "loading" ? (
+          <Text>{status === "loading" ? (
             <>
-              <LoaderCircle className="spin" size={18} />
-              Previewing submission…
-            </>
+              <LoaderCircle className="spin" size={18} /><Text>{"Previewing submission…"}</Text></>
           ) : (
             <>
-              {volunteer ? "Preview application" : "Preview enquiry"}
+              <Text>{volunteer ? "Preview application" : "Preview enquiry"}</Text>
               <ArrowUpRight size={18} />
             </>
-          )}
+          )}</Text>
         </button>
       </fieldset>
     </form>
